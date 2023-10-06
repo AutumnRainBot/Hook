@@ -22,7 +22,7 @@ BOOL Hook(void* Address, void* OurFunction, int len)
 
         //Restore protection
         DWORD temp;
-        VirtualProtect(Address, len, protection, &temp);//make it so the new protection is the old protection we store in the (protection) variable
+        VirtualProtect(Address, len, protection, &temp);//make it so the new protection is the old protection we stored in the (protection) variable
 
         return true;
     }
@@ -32,7 +32,7 @@ BOOL Hook(void* Address, void* OurFunction, int len)
     }
 }
 
-DWORD jmpbk; // we need to jump back to where we hooked + 6; cuz 1(jmp) 4(address where we need to jump) 1(get the byte after it) 
+DWORD jmpbk; // we need to jump back to where we hooked + 6; cuz 1(jmp) 4(address where we need to jump) 1(get the byte after it)
 
 __declspec(naked) void ourFunc()
 {
@@ -56,7 +56,7 @@ void Main()
     jmpbk = hookaddress + hooklength;
     if (Hook((void*)hookaddress, ourFunc, hooklength))
     {
-        MessageBoxA(0, "Successfully hooked !","Success",0);
+        MessageBoxA(0, "Successfully hooked , be proud !","Success",0);
         Print("Hooked dec[eax] -> inc[eax]");
     }
     else
