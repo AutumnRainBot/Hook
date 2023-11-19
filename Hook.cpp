@@ -75,7 +75,7 @@ void Main()
     jmpbk = hookaddress + hooklength;
     if (Hook((void*)hookaddress, ourFunc, hooklength))
     {
-        MessageBoxA(0, "Successfully hooked , be proud !","Success",0);
+        MessageBoxA(0, "Successfully hooked ","Success",0);
         Print("Hooked dec[eax] -> inc[eax]");
     }
     else
