@@ -34,10 +34,29 @@ BOOL Hook(void* Address, void* OurFunction, int len)
 
 DWORD jmpbk; // we need to jump back to where we hooked + 6; cuz 1(jmp) 4(address where we need to jump) 1(get the byte after it)
 
+void* teax;
+void* tebx;
+void* tecx;
+void* tedx;
+void* tesi;
+void* tedi;
+void* tebp;
+void* tesp;
+
 __declspec(naked) void ourFunc()
 {
     _asm
     {
+        mov teax, eax; backup
+        mov tebx, ebx
+        mov tecx, ecx
+        mov tedx, edx
+        mov tesi, esi
+        mov tedi, edi
+        mov tebp, ebp
+        mov tesp, esp
+        //end of the backup register
+
         inc[eax] //incrementing the value stored in the register eax; [eax] means value at eax
         jmp[jmpbk]//jump back to the next instruction after where we hook to avoid crash
     }
